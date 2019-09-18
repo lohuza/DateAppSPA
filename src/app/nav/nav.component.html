@@ -1,33 +1,30 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Dating App</a>
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['/home']">Dating App</a>
 
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item active">
-      <a class="nav-link" href="#">Matches</a>
+  <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
+    <li class="nav-item" routerLinkActive="active">
+      <a class="nav-link" [routerLink]="['/members']">Matches</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Lists</a>
+    <li class="nav-item" routerLinkActive="active">
+      <a class="nav-link" [routerLink]="['/lists']">Lists</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#">Messages</a>
+    <li class="nav-item" routerLinkActive="active">
+      <a class="nav-link" [routerLink]="['/messages']">Messages</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" *ngIf="loggedIn()" (click)="logout()" href="#">Logout</a>
-    </li>
-    
   </ul>
 
-  <div *ngIf="loggedIn()" class="dropdown">
-    <a class="dropdown-toggle text-light">
-      Welcome User
+  <div *ngIf="loggedIn()" class="dropdown" ngbDropdown>
+    <a class="dropdown-toggle text-light" id="dropdownConfig" ngbDropdownToggle>
+      Welcome {{authService.decodedToken.unique_name | titlecase}}
     </a>
 
-    <div class="dropdown-menu">
+    <div class="dropdown-menu mt-3" ngbDropdownMenu aria-labelledby="dropdownConfig">
       <a class="dropdown-item" href="#"
         ><i class="fa fa-user"></i>Edit Profile</a
       >
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#"><i class="fa fa-sign-out"></i>Logout</a>
+      <a class="dropdown-item" href="#" (click)="logout()"><i class="fa fa-sign-out"></i>Logout</a>
     </div>
   </div>
 
@@ -62,4 +59,5 @@
       Login
     </button>
   </form>
+  </div>
 </nav>
