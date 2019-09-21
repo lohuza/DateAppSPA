@@ -9,12 +9,14 @@ import { AuthService } from './_services/auth.service';
 export class AppComponent implements OnInit {
   title = 'DatingAppSPA';
 
-  constructor(private authService: AuthService) {  }
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     const token = localStorage.getItem('token');
-    if(token) {
-      this.authService.decodedToken = this.authService.jwtHelper.decodeToken(token);
+    if (token) {
+      this.authService.decodedToken = this.authService.jwtHelper.decodeToken(
+        token
+      );
     }
   }
 }
